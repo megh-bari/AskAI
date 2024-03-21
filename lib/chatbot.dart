@@ -12,7 +12,7 @@ class Chatbot extends StatefulWidget {
 
 class _ChatbotState extends State<Chatbot> {
   ChatUser me = ChatUser(id: '1', firstName: 'megh');
-  ChatUser ai = ChatUser(id: '2', firstName: 'ChatGPT');
+  ChatUser ai = ChatUser(id: '2', firstName: 'AskAI');
   List<ChatMessage> allMessages = [];
   List<ChatUser> typing = [];
 
@@ -36,16 +36,8 @@ class _ChatbotState extends State<Chatbot> {
     });
   }
 
-  void loadChatHistory() {
-    // Load chat history from storage or database
-    // For demonstration, we'll not add any pre-defined messages here
-    setState(() {
-      allMessages = []; // Remove any pre-defined messages
-    });
-  }
-
   void getdata(ChatMessage m) async {
-    typing.add(ai);
+    typing.add(ai); // Set typing status to AskAI
     allMessages.insert(0, m);
     setState(() {});
 
@@ -72,8 +64,8 @@ class _ChatbotState extends State<Chatbot> {
               var text = message['content'] as String;
               print(text);
 
-              ChatMessage m1 = ChatMessage(
-                  text: text, user: ai, createdAt: DateTime.now());
+              ChatMessage m1 =
+              ChatMessage(text: text, user: ai, createdAt: DateTime.now());
 
               allMessages.insert(0, m1);
             } else {
@@ -108,7 +100,8 @@ class _ChatbotState extends State<Chatbot> {
               onTap: resetChat,
               child: Text(
                 'AskAI',
-                style: TextStyle(color: Colors.black), // Set text color explicitly
+                style:
+                TextStyle(color: Colors.black), // Set text color explicitly
               ),
             ),
             Spacer(),
@@ -124,7 +117,6 @@ class _ChatbotState extends State<Chatbot> {
           ],
         ),
       ),
-
       drawer: Drawer(
         child: Column(
           children: <Widget>[
@@ -133,7 +125,7 @@ class _ChatbotState extends State<Chatbot> {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
               child: ListTile(
                 leading: Icon(Icons.handshake, color: Colors.white),
                 title: Text(
@@ -144,18 +136,6 @@ class _ChatbotState extends State<Chatbot> {
                   Navigator.pop(context);
                 },
               ),
-            ),
-            ListTile(
-              title: Text('Chat History'),
-              leading: Icon(Icons.history),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatHistoryScreen(allMessages: allMessages),
-                  ),
-                );
-              },
             ),
             ListTile(
               title: Text('New Chat'),
@@ -173,7 +153,7 @@ class _ChatbotState extends State<Chatbot> {
         ),
       ),
       body: Container(
-        color: Colors.white, // Set background color for chat screen
+        color: Colors.grey[200], // Set background color for chat screen
         child: DashChat(
           typingUsers: typing,
           currentUser: me,
@@ -185,7 +165,6 @@ class _ChatbotState extends State<Chatbot> {
       ),
     );
   }
-
 
   void resetChatDialog() {
     showDialog(
@@ -220,100 +199,6 @@ class _ChatbotState extends State<Chatbot> {
     );
   }
 }
-
-class ChatHistoryScreen extends StatelessWidget {
-  final List<ChatMessage> allMessages;
-
-  const ChatHistoryScreen({Key? key, required this.allMessages})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // Group chat messages by date
-    Map<DateTime, List<ChatMessage>> groupedMessages = {};
-    allMessages.forEach((message) {
-      DateTime date = DateTime(
-        message.createdAt!.year,
-        message.createdAt!.month,
-        message.createdAt!.day,
-      );
-      if (!groupedMessages.containsKey(date)) {
-        groupedMessages[date] = [];
-      }
-      groupedMessages[date]!.insert(
-        0,
-        message,
-      ); // Insert at the beginning to maintain order
-    });
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat History'),
-      ),
-      body: Container(
-        color: Colors.white, // Set background color to white
-        child: ListView.builder(
-          itemCount: groupedMessages.length,
-          itemBuilder: (context, index) {
-            DateTime date = groupedMessages.keys.elementAt(index);
-            List<ChatMessage> messages = groupedMessages[date]!;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '${date.day}/${date.month}/${date.year}',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: messages.map((message) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 4.0,
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: message.user.id == '1'
-                              ? Colors.blue[100]
-                              : Colors.grey[300],
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              message.text,
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              message.user.id == '1' ? 'Me' : 'ChatGPT',
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                // fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-
 
 void main() {
   runApp(MaterialApp(
