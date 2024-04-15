@@ -28,7 +28,6 @@ flutter run
 
 This project is licensed under the [MIT License](LICENSE).
 
----
 
 Feel free to customize it with more detailed instructions or additional sections as needed!
 
