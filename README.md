@@ -32,4 +32,13 @@ This project is licensed under the [MIT License](LICENSE).
 
 Feel free to customize it with more detailed instructions or additional sections as needed!
 
+## Connect with Me 🤝
+Let's connect! Find me on
+- Mail: meghbari01@gamail.com
+  
+## Find me on social media
+- **Instagram:** [@spidey._.01](https://www.instagram.com/spidey._.01/)
+- **Twitter:** [@megh_bari](https://twitter.com/megh_bari/)
+
+
 ## Happy Coding 🎈
