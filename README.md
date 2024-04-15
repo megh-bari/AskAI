@@ -1,16 +1,35 @@
-# chatbot
+# AskAI
 
-A new Flutter project.
+AskAI is a Flutter-based chat bot application developed in Dart. This project integrates with the OpenAI API to provide intelligent responses. The user interface is built using Dash Chat for a smooth and intuitive chat experience. Additionally, AskAI includes a drawer menu for managing chats, allowing users to start new conversations and delete existing ones effortlessly.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Integration with OpenAI API for intelligent responses
+- Dash Chat UI for a sleek and user-friendly chat interface
+- Drawer menu for easy chat management: start new chats and delete existing ones
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone this repository.
+2. Add your OpenAI API key to the appropriate configuration file.
+3. Run the app using Flutter.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter run
+```
+
+## Usage
+
+1. Launch the app.
+2. Start a new chat or continue existing conversations.
+3. Enjoy conversing with the AI-powered chat bot!
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+Feel free to customize it with more detailed instructions or additional sections as needed!
+
+## Happy Coding 🎈
